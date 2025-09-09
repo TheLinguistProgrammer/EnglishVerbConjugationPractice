@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport", content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles.css" />
+        <title>Sentence Prompt Generator</title>
+    </head>
+    
+    <body>
+        <h1>Sentence Prompt Generator</h1>
+        <legend>Please select the pronouns you wish to practice.</legend>
+        <label id="pronouns">
+            <input type="checkbox" value="I"></input><p>I</p>
+            <input type="checkbox" value="You"></input><p>You</p>
+            <input type="checkbox" value="He"></input><p>He</p>
+            <input type="checkbox" value="She"></input><p>She</p>
+            <input type="checkbox" value="It"></input><p>It</p>
+            <input type="checkbox" value="We"></input><p>We</p>
+            <input type="checkbox" value="You (Plural)"></input><p>You (plural)</p>
+            <input type="checkbox" value="They"></input><p>They</p>
+        </label>
+        
+        <div id="other-options">
+            <input type="checkbox" id="negative-checkbox">Negative</input>
+            <!--<input type="checkbox">Question</input>-->
+            <button id="generate-btn">Generate</button>
+        </div>
+
+        
+        <!--
+        <fieldset>
+            <label>Select the level for verbs</label>
+            <select>
+                <option>A1</option>
+                <option>A2</option>
+                <option>A1-A2</option>
+            </select>
+        </fieldset>
+        -->
+
+        <div id="output">
+            <div id="prompts"></div>
+            <div id="solution"></div>
+        </div>
+    </body>
+    <script src="script.js"></script>
+</html>
