@@ -3,46 +3,57 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport", content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/styles.css" />
+        <link rel="stylesheet" href="./styles.css" />
         <title>Sentence Prompt Generator</title>
     </head>
     
     <body>
         <h1>Sentence Prompt Generator</h1>
-        <legend>Please select the pronouns you wish to practice.</legend>
         <label id="pronouns">
-            <input type="checkbox" value="I"></input><p>I</p>
-            <input type="checkbox" value="You"></input><p>You</p>
-            <input type="checkbox" value="He"></input><p>He</p>
-            <input type="checkbox" value="She"></input><p>She</p>
-            <input type="checkbox" value="It"></input><p>It</p>
-            <input type="checkbox" value="We"></input><p>We</p>
-            <input type="checkbox" value="You (Plural)"></input><p>You (plural)</p>
-            <input type="checkbox" value="They"></input><p>They</p>
+            <input type="checkbox" value="I" checked></input><p>I</p>
+            <input type="checkbox" value="You" checked></input><p>You</p>
+            <input type="checkbox" value="He" checked></input><p>He</p>
+            <input type="checkbox" value="She" checked></input><p>She</p>
+            <input type="checkbox" value="It" checked></input><p>It</p>
+            <input type="checkbox" value="We" checked></input><p>We</p>
+            <!--input type="checkbox" value="You (Plural)" checked></input><p>You (plural)</p-->
+            <input type="checkbox" value="They" checked></input><p>They</p>
         </label>
-        
-        <div id="other-options">
-            <input type="checkbox" id="negative-checkbox">Negative</input>
-            <!--<input type="checkbox">Question</input>-->
-            <button id="generate-btn">Generate</button>
-        </div>
 
-        
-        <!--
-        <fieldset>
-            <label>Select the level for verbs</label>
-            <select>
+        <div id="other-options">
+            <input type="checkbox" id="negative-checkbox"></input><p>Negative</p>
+            <div>
+            <select id="level-select">
                 <option>A1</option>
                 <option>A2</option>
                 <option>A1-A2</option>
             </select>
-        </fieldset>
-        -->
+            </div>
+            <!--<input type="checkbox">Question</input>-->
+            <select id="tense-select">
+                <option value="present simple">present simple</option>
+                <option value="past simple">past simple</option>
+                <option value="future simple">future simple</option>
+                <option value="present continuous">present continuous</option>
+                <option value="past continuous">past continuous</option>
+                <option value="present perfect">present perfect</option>
+                <option value="past perfect">past perfect</option>
+                <option value="all">ALL</option>
+            </select>
+            <button id="generate-btn">Generate</button>
+        </div>
 
         <div id="output">
-            <div id="prompts"></div>
-            <div id="solution"></div>
+            <div id="prompts">
+                <div id="prompt-pronoun">PRONOUN</div>
+                <div id="prompt-negative">NEGATIVE</div>
+                <div id="prompt-verb">VERB</div>
+            </div>
+            <div id="solution-and-cover">
+                <div id="solution"></div>
+                <p id="cover">Please hover to view the solution</p>
+            </div>
         </div>
     </body>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </html>
