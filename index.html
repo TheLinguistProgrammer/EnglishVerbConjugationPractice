@@ -8,7 +8,7 @@
     </head>
     
     <body>
-        <h1>Sentence Prompt Generator</h1>
+        <h1>English Verb Conjugation Practice</h1>
         <label id="pronouns">
             <input type="checkbox" value="I" checked></input><p>I</p>
             <input type="checkbox" value="You" checked></input><p>You</p>
@@ -23,10 +23,13 @@
         <div id="other-options">
             <input type="checkbox" id="negative-checkbox"></input><p>Negative</p>
             <div>
-            <select id="level-select">
-                <option>A1</option>
-                <option>A2</option>
-                <option>A1-A2</option>
+            <select id="cefr-level">
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="other">other</option>
+                <option value="ALL">ALL</option>
             </select>
             </div>
             <!--<input type="checkbox">Question</input>-->
@@ -40,9 +43,11 @@
                 <option value="past perfect">past perfect</option>
                 <option value="all">ALL</option>
             </select>
+            <button id="show-hide-answer-btn">Show/hide answer</button>
             <button id="generate-btn">Generate</button>
         </div>
 
+        <div id="tense-info"></div>
         <div id="output">
             <div id="prompts">
                 <div id="prompt-pronoun">PRONOUN</div>
