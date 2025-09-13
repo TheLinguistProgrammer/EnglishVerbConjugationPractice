@@ -4,6 +4,13 @@ const prompts = document.getElementById("prompts");
 const solution = document.getElementById("solution");
 const negativeCheckbox = document.getElementById("negative-checkbox");
 const tenseSelect = document.getElementById("tense-select");
+const showHideAnswerBtn = document.getElementById("show-hide-answer-btn");7
+const cefrLevel = document.getElementById("cefr-level");
+const tenseInfo = document.getElementById("tense-info");
+let hiddenStatus = false;
+let tenseInfoSide = "";
+currentTense = "";
+
 // prompt
 const promptPronoun = document.getElementById("prompt-pronoun");
 const promptModal = document.getElementById("prompt-modal");
@@ -22,10 +29,26 @@ function selectRandomPronoun() {
     return pronounsArray[randInt];
 }
 
-function selectRandomVerb(pronoun) {
-    const randInt = Math.ceil(Math.random()*verbData.length-1);
-    return verbData[randInt];
+function selectRandomVerb(cefr, pronoun) {
+    let dataFrame = [];
+    switch (cefr) {
+        case "A1":
+            dataFrame = a1Verbs; break;
+        case "A2":
+            dataFrame = a2Verbs; break;
+        case "B1":
+            dataFrame = b1Verbs; break;
+        case "B2":
+            dataFrame = b2Verbs; break;
+        case "other":
+            dataFrame = otherVerbs; break;
+        default:
+            dataFrame = verbData; break;
+    }
+    const randInt = Math.ceil(Math.random()*dataFrame.length-1);
+    return dataFrame[randInt];
 }
+
 
 // LAYOUT: __PRONOUN + __MODAL + __NEG + __VERB
 function printOutput() {
@@ -35,15 +58,17 @@ function printOutput() {
     let solutionText = "";
     let isThirdPerson = false;
     let pronoun = selectRandomPronoun();
-    let verbForms = selectRandomVerb(pronoun);
+    let verbForms = selectRandomVerb(cefrLevel.value, pronoun);
     layout = layout.replace("__PRONOUN", pronoun);
     if (pronoun === "He" || pronoun === "She" || pronoun === "It") {isThirdPerson = true;} else {isThirdPerson = false;}
     isNegative = negativeCheckbox.checked;
     if (!isNegative) {layout = layout.replace("__NEG", "")};
-    switch(tenseSelect.value) {
-        case "all":
-            // This does not work //
-            console.log("all");
+
+    currentTense = tenseSelect.value;
+    if (tenseSelect.value === "all") {
+        currentTense = tenseList[Math.floor(Math.random()*tenseList.length)]
+    }
+    switch(currentTense) {
         case "present simple":
             layout = layout.replace("__MODAL", "");
             if (isThirdPerson && !isNegative) {layout = layout.replace("__VERB", verbForms[3])} 
@@ -91,6 +116,29 @@ function printOutput() {
     promptNegative.innerText = isNegative ? "NEGATIVE" : "POSITIVE";
     promptVerb.innerText = verbForms[0];
     solution.innerText = solutionText;
+    tenseInfo.innerText = currentTense;
+    tenseInfoSide = "tense";
+}
+
+function showTenseInfo (side=tenseInfoSide) {
+    const explanations = {
+        "present simple": "VERB (base form)",
+        "past simple": "VERB in past form (past form)",
+        "future simple": "Will + verb (base form)",
+        "present continuous": "am/is/are + gerund (verb + ing)",
+        "past continuous": "was/were + gerund (verb + ing)",
+        "present perfect": "have/has + past participle (Verb 3)",
+        "past perfect": "had + past participle (Verb 3)"
+    };
+    if (tenseInfoSide === "tense") {
+        tenseInfo.innerText = explanations[currentTense];
+        tenseInfo.style.fontStyle = "italic";
+        tenseInfoSide = "explanation";
+    } else if (tenseInfoSide === "explanation") {
+        tenseInfo.innerText = currentTense;
+        tenseInfo.style.fontStyle = "normal";
+        tenseInfoSide = "tense";
+    }
 }
 
 generateBtn.addEventListener("click", printOutput);
@@ -99,14 +147,48 @@ document.documentElement.addEventListener("keypress", (e)=>{
         printOutput();
     }
 })
+tenseInfo.addEventListener("click", showTenseInfo);
 
-// myData[0] = ['stem', 'past', 'past participle', '3 SG', 'ing']
+
+function showHideAnswer() {
+    if (hiddenStatus) {
+        cover.style.display = "";
+        showHideAnswerBtn.style.backgroundColor = "#c6c3c3";
+        hiddenStatus = false;
+    } else {
+        cover.style.display = "none";
+        showHideAnswerBtn.style.backgroundColor = "white";
+        hiddenStatus = true;
+    }
+}
+
+showHideAnswerBtn.addEventListener("click", showHideAnswer);
+// myData[0] = ['stem', 'past', 'past participle', '3 SG', 'ing', 'cefr']
 let verbData = [];
- fetch("1k_verbs.csv")
+let a1Verbs = [];
+let a2Verbs = [];
+let b1Verbs = [];
+let b2Verbs = [];
+let otherVerbs = [];
+ fetch("https://raw.githubusercontent.com/TheLinguistProgrammer/sentencePrompt/refs/heads/main/1k_verbs_cefr2.csv")
   .then((res) => res.text())
   .then((text) => {
     // do something with "text"
     let lines = text.split('\n');
-    verbData = lines.map(str => (str.substr(0,str.length-1)).split("\t"));
+    verbData = lines.map(str => (str.substr(0,str.length-1)).split("\t")); 
+    for (i=0; i<verbData.length; i++) {
+        if (verbData[i][5] === "A1") {
+            a1Verbs.push(verbData[i]);
+        } else if (verbData[i][5] === "A2") {
+            a2Verbs.push(verbData[i]);
+        } else if (verbData[i][5] === "B1") {
+            b1Verbs.push(verbData[i]);
+        } else if (verbData[i][5] === "B2") {
+            b2Verbs.push(verbData[i]);
+        } else if (verbData[i][5] === "") {
+            otherVerbs.push(verbData[i]);
+        }
+    }
    })
   .catch((e) => console.error(e));
+
