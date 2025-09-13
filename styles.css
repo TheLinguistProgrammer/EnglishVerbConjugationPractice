@@ -7,33 +7,53 @@
 html {
     font-size: 1rem;
     background-color: #6f9f9c;
+    user-select: none;
 }
 
 h1 {
     font-size: 3rem;
     color: white;
     text-align: center;
-    margin: 30px 0;
+    margin: 30px 20px;
+
+}
+
+summary {
+    margin: 5px;
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
+details {
+    padding: 10px 0;
+    font-size: 1.2rem;
+    background-color: white;
+    width: 80vw;
+    margin: 5px auto;
+    border-radius: 15px;
+    display: flex;
 }
 
 #pronouns {
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
-    height: 80px;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     align-items: center;
 }
 
 #pronouns p {
-    padding-right: 30px;
-    border: 1px solid black;
-    font-size: 1.5rem;
+    font-size: auto;
     background-color: white;
+    margin-right: 10px;
 }
 
 #pronouns input {
-    width: 30px;
-    height: 30px;
-    margin-left: 20px;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
 }
 
 #pronouns input:hover {
@@ -41,15 +61,63 @@ h1 {
 }
 
 #negative-checkbox {
-    width: 80px;
+    width: 30px;
+    height: 30px;
+}
+
+#negative-checkbox:hover {
+    cursor: pointer;
+}
+
+
+#other-options {
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+select {
     height: 40px;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 20px;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+#tense-and-buttons {
+    margin: 10px auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+
+#tense-info {
+    margin: 10px auto;
+    padding: 5px 0;
+    width: 50vw;
+    height: 60px;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 2rem;
+    align-content: center;
+}
+
+#tense-info:hover {
+    cursor: pointer;
 }
 
 #generate-btn {
-    margin-left: 50px;
-    width: 300px;
-    height: 40px;
-    border-radius: 5px;
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
 }
 
 #generate-btn:hover {
@@ -57,53 +125,14 @@ h1 {
 }
 
 #show-hide-answer-btn {
-    width: 150px;
-    height: 40px;
-    border-radius: 5px;
-    margin-left: 30px;
+    width: 200px;
+    height: 60px;
+    border-radius: 10px;
     background-color: #c6c3c3;
 }
 
 button:hover {
     background-color: #c6c3c3;
-    cursor: pointer;
-}
-
-#other-options {
-    display: flex;
-    margin: 30px;
-    justify-content: center;
-    align-items: center;
-}
-
-#other-options p {
-    margin-left: -10px;
-    margin-right: 30px;
-}
-
-select {
-    height: 40px;
-    width: 250px;
-    text-align: center;
-    border-radius: 5px;
-    margin: 0 20px;
-}
-
-#tense-info {
-    margin: 10px auto;
-    padding: 5px 0;
-    width: 80%;
-    height: 80px;
-    background-color: white;
-    border-radius: 10px;
-    border: 2px solid black;
-    text-align: center;
-    font-size: 2rem;
-    align-content: center;
-    user-select: none;
-}
-
-#tense-info:hover {
     cursor: pointer;
 }
 
@@ -131,10 +160,9 @@ select {
 }
 
 #prompts div {  
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
     border-radius: 10px;
-    padding: 1rem;
     margin: 0.3rem;
     border: 2px solid black;
 }
@@ -196,16 +224,59 @@ select {
         overflow: hidden;
     }
 
+    h1 {
+        font-size: 2rem;
+    }
+
+    #pronouns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    #other-options {
+        flex-direction: column;
+    }
+
+    #tense-and-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    #tense-info {
+        width: 300px;
+        font-size: 1.3rem;
+        grid-column: span 2;
+        grid-row: span 1;
+
+    }
+
+    #show-hide-answer-btn {
+        width: 100%;
+        grid-column: 1 / 2;
+        grid-row: 2 / 2;
+    }
+
+    #generate-btn {
+        width: 100%;
+        grid-column: 2 / 2;
+        grid-row: 2 / 2;
+}
+
+
     #output {
         flex-direction: column;
     }
 
     #prompts {
+        height: 200px;
         width: 80vw;
         margin: 10px auto;
+        display: grid;
     }
     
     #solution, #cover{
+        height: 200px;
         width: 80vw;
         margin: 10px auto;
     }

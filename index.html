@@ -9,6 +9,8 @@
     
     <body>
         <h1>English Verb Conjugation Practice</h1>
+        <details>
+        <summary>Pronouns</summary>
         <label id="pronouns">
             <input type="checkbox" value="I" checked></input><p>I</p>
             <input type="checkbox" value="You" checked></input><p>You</p>
@@ -19,9 +21,10 @@
             <!--input type="checkbox" value="You (Plural)" checked></input><p>You (plural)</p-->
             <input type="checkbox" value="They" checked></input><p>They</p>
         </label>
+    </details>
 
         <div id="other-options">
-            <input type="checkbox" id="negative-checkbox"></input><p>Negative</p>
+            <input type="checkbox" id="negative-checkbox">Negative</input>
             <div>
             <select id="cefr-level">
                 <option value="A1">A1</option>
@@ -43,11 +46,13 @@
                 <option value="past perfect">past perfect</option>
                 <option value="all">ALL</option>
             </select>
+        </div>
+
+        <div id="tense-and-buttons">
+            <div id="tense-info"></div>
             <button id="show-hide-answer-btn">Show/hide answer</button>
             <button id="generate-btn">Generate</button>
         </div>
-
-        <div id="tense-info"></div>
         <div id="output">
             <div id="prompts">
                 <div id="prompt-pronoun">PRONOUN</div>
