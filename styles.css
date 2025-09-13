@@ -165,6 +165,8 @@ button:hover {
     border-radius: 10px;
     margin: 0.3rem;
     border: 2px solid black;
+    height: 80%;
+    align-content: center;
 }
 
 #prompt-pronoun {
