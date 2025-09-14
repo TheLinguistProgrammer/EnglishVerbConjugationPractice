@@ -24,7 +24,10 @@
     </details>
 
         <div id="other-options">
-            <input type="checkbox" id="negative-checkbox">Negative</input>
+            <div id="checkbox-container">
+                <input type="checkbox" id="negative-checkbox"><p>Only Negative</p></input>
+                <input type="checkbox" id="mix-checkbox"><p>Mix positive/negative</p></input>
+            </div>
             <div>
             <select id="cefr-level">
                 <option value="A1">A1</option>
@@ -65,5 +68,11 @@
             </div>
         </div>
     </body>
+    <footer>
+        <select id="language-select">
+            <option>Turkish</option>
+            <option>Chinese</option>
+        </select>
+    </footer>
     <script src="./script.js"></script>
 </html>

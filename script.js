@@ -3,13 +3,17 @@ const generateBtn = document.getElementById("generate-btn");
 const prompts = document.getElementById("prompts");
 const solution = document.getElementById("solution");
 const negativeCheckbox = document.getElementById("negative-checkbox");
+const mixCheckbox = document.getElementById("mix-checkbox");
 const tenseSelect = document.getElementById("tense-select");
 const showHideAnswerBtn = document.getElementById("show-hide-answer-btn");7
 const cefrLevel = document.getElementById("cefr-level");
 const tenseInfo = document.getElementById("tense-info");
+const languageSelect = document.getElementById("language-select");
 let hiddenStatus = false;
 let tenseInfoSide = "";
 currentTense = "";
+let verbForms = [];
+let verbSide = "english";
 
 // prompt
 const promptPronoun = document.getElementById("prompt-pronoun");
@@ -58,10 +62,11 @@ function printOutput() {
     let solutionText = "";
     let isThirdPerson = false;
     let pronoun = selectRandomPronoun();
-    let verbForms = selectRandomVerb(cefrLevel.value, pronoun);
+    verbForms = selectRandomVerb(cefrLevel.value, pronoun);
     layout = layout.replace("__PRONOUN", pronoun);
     if (pronoun === "He" || pronoun === "She" || pronoun === "It") {isThirdPerson = true;} else {isThirdPerson = false;}
     isNegative = negativeCheckbox.checked;
+    if (mixCheckbox.checked) {isNegative = Math.random() < 0.5 ? false : true;}
     if (!isNegative) {layout = layout.replace("__NEG", "")};
 
     currentTense = tenseSelect.value;
@@ -118,6 +123,7 @@ function printOutput() {
     solution.innerText = solutionText;
     tenseInfo.innerText = currentTense;
     tenseInfoSide = "tense";
+    tenseInfo.style.fontStyle = "normal";
 }
 
 function showTenseInfo (side=tenseInfoSide) {
@@ -149,6 +155,25 @@ document.documentElement.addEventListener("keypress", (e)=>{
 })
 tenseInfo.addEventListener("click", showTenseInfo);
 
+promptVerb.addEventListener("click", showTranslation);
+
+function showTranslation() {
+    let languageIndex = 0;
+    switch (languageSelect.value) {
+        case "Turkish":
+            languageIndex = 6; break;
+        case "Chinese":
+            languageIndex = 7; break;
+    }
+
+    if (verbSide === "english") {
+        verbSide = "translation";
+        promptVerb.innerText = verbForms[languageIndex];
+    } else if (verbSide === "translation") {
+        verbSide = "english";
+        promptVerb.innerText = verbForms[0];
+    }
+}
 
 function showHideAnswer() {
     if (hiddenStatus) {
@@ -163,14 +188,15 @@ function showHideAnswer() {
 }
 
 showHideAnswerBtn.addEventListener("click", showHideAnswer);
-// myData[0] = ['stem', 'past', 'past participle', '3 SG', 'ing', 'cefr']
+// myData[0] = ['stem', 'past', 'past participle', '3 SG', 'ing', 'cefr', 'tr', 'zh']
 let verbData = [];
 let a1Verbs = [];
 let a2Verbs = [];
 let b1Verbs = [];
 let b2Verbs = [];
 let otherVerbs = [];
- fetch("https://raw.githubusercontent.com/TheLinguistProgrammer/sentencePrompt/refs/heads/main/1k_verbs_cefr2.csv")
+// "https://raw.githubusercontent.com/TheLinguistProgrammer/sentencePrompt/refs/heads/main/1k_verbs_cefr2.csv"
+ fetch("https://raw.githubusercontent.com/TheLinguistProgrammer/sentencePrompt/refs/heads/main/verbs_cefr_tr_zh.csv")
   .then((res) => res.text())
   .then((text) => {
     // do something with "text"

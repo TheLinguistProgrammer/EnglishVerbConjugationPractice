@@ -60,13 +60,20 @@ details {
     cursor: pointer;
 }
 
-#negative-checkbox {
+#negative-checkbox, #mix-checkbox {
     width: 30px;
     height: 30px;
+    margin: 10px;
 }
 
-#negative-checkbox:hover {
+#negative-checkbox:hover, #mix-checkbox:hover {
     cursor: pointer;
+}
+
+#checkbox-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 
@@ -181,6 +188,10 @@ button:hover {
     background-color: #2A9DF4;
 }
 
+#prompt-verb:hover {
+    cursor: pointer;
+}
+
 #solution {
     width: min(40vw, 500px); 
     height: 300px;
@@ -219,6 +230,16 @@ button:hover {
     display: grid;
 }
 
+footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#language-select {
+    display: block;
+    margin: 0 auto; 
+}
+
 
 @media (max-width: 500px) {
     #html {
@@ -247,7 +268,7 @@ button:hover {
     
     #tense-info {
         width: 300px;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         grid-column: span 2;
         grid-row: span 1;
 
