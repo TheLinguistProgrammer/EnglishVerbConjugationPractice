@@ -4,4 +4,6 @@ The aim of this application is to provide a simple way for students of the Engli
 - grammar explanation upon clicking on the tense
 - translation upon clicking on the verb (Turkish and Chinese using Google Translate)
 
+The python scripts facilitated changing the data, along with google sheets for the translations.
 This project took 6 days (September)
+
